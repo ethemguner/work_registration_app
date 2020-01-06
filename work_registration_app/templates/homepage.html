@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block TITLE %}Homepage{% endblock %}
+
+{% block BODY %}
+<div class="col-12">
+    <div class="row justify-content-center" style="margin-top: 250px;">
+        <a href="{% url 'add-registry' %}" style="font-size: 30px">
+            <i class="fas fa-plus"></i> New Registry
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'list-registry' %}" style="font-size: 30px">
+            <i class="fas fa-clipboard-list"></i> List TODOs
+        </a>
+
+    </div>
+    <div class="row justify-content-center" style="margin-top: 100px;">
+        <p style="color: lightgray; font-family: 'Corbel Light'; font-size: 20px">
+            Create a new registry or list existing TODOs and manage them.
+        </p>
+    </div>
+</div>
+{% endblock %}

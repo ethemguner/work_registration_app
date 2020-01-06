@@ -1,0 +1,14 @@
+{% if messages %}
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6" style="float: none; margin:0 auto; margin-top: 50px;">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" runat="server" id="modalEditError"
+                     visible="false">
+                    <button class="close" type="button" data-dismiss="alert">×</button>
+                    {{ message|safe }}
+                    <div id="Div2" runat="server"></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

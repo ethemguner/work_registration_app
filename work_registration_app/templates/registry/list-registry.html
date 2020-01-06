@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load browsering_status %}
+{% block TITLE %}TODOs List{% endblock %}
+
+{% block HEAD %}
+<!-- DELETING REGISTRY W/ AJAX REQUEST -->
+<script type="text/javascript" rel="script">
+    $(document).ready(function () {
+        $(".deleteRegistry").click(function () {
+            if (confirm('TODO will be deleted permanently, do you really want to delete?')) {
+                var $this = $(this);
+                var $url = $this.attr('url');
+
+                $.ajax({
+                    url: $url,
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {},
+                    success: function () {
+                        location.reload()
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block BODY %}
+<div class="row" style="margin-top: 150px;">
+    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-2">
+        <h2 class="text-center" style="color: cornflowerblue">TODO LIST</h2>
+        <table class="table table-dark">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">STATEMENT</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">Confirm</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- REGISTRY ITERATION -->
+            {% for registry in allRegistries %}
+                <tr class="text-center" style="font-family: 'Trebuchet MS';">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>
+                        {{registry.content}}
+                    </td>
+                    <td>
+                        {% if registry.status == "0" %}
+                            <span style="color: orangered;">
+                            {{ browsering_status|get_status:registry.status }}
+                            </span>
+                        {% else %}
+                            <span style="color: greenyellow;">
+                            {{ browsering_status|get_status:registry.status }}
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{registry.entryTime}}
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-success">
+                            <a href="{% url 'confirm-registry' registry.id %}" style="color: white">
+                                <i class="fas fa-check-circle"></i> CONFIRM TODO
+                            </a>
+                        </button>
+                    </td>
+                    <td>
+                        <a href="#">
+                            <i class="deleteRegistry fas fa-trash"
+                               pk="{{ registry.id }}"
+                               url="{% url 'delete-registry' registry.id %}"
+                               style="color: red; font-size: 25px;"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <!-- EMPTY ITERATION -->
+                <tr class="text-center" style="color: red">
+                    <th scope="row">1</th>
+                    <td>NO REGISTRY FOUND</td>
+                    <td>NO REGISTRY FOUND</td>
+                    <td>NO REGISTRY FOUND</td>
+                    <td>NO REGISTRY FOUND</td>
+                    <td>NO REGISTRY FOUND</td>
+                </tr>
+            {% endfor %}
+            <!-- ITERATION END -->
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

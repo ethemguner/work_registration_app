@@ -1,0 +1,10 @@
+body{
+    background-color: #1b1e21;
+}
+
+.row {
+  background-color: #FFDC00;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}

@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <script rel="script" type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://kit.fontawesome.com/9347fc1229.js" crossorigin="anonymous"></script>
+    <title>{% block TITLE %}<!--TITLE-->{% endblock %}</title>
+    {% block HEAD %}{% endblock %}
+</head>
+<body>
+<!-- MESSAGES -->
+{% include 'message.html' %}
+
+{% block BODY %}
+<!--CONTENT-->
+{% endblock %}
+
+</body>
+</html>
